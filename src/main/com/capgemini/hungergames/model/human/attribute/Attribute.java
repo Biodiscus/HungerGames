@@ -41,7 +41,11 @@ public class Attribute {
     }
 
     public void setHealth(float health) {
-        this.health = health;
+        if(this.health <= 0) {
+            this.health = 0;
+        } else {
+            this.health = health;
+        }
     }
 
     public float getChance() {

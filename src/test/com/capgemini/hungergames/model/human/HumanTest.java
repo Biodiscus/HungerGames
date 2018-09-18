@@ -93,4 +93,16 @@ public class HumanTest {
         h2.heal();
         assertEquals(45F, h2.getHealth(), EPSILON);
     }
+
+    @Test
+    public void setHealth() {
+        human.setHealth(100F);
+        assertEquals(100F, human.getHealth(), EPSILON);
+
+        human.setHealth(0F);
+        assertEquals(0F, human.getHealth(), EPSILON);
+
+        human.setHealth(-10F);
+        assertEquals(0F, human.getHealth(), EPSILON);
+    }
 }

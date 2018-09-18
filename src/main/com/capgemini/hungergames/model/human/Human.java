@@ -81,15 +81,6 @@ public class Human extends Attribute {
         }
     }
 
-    // TODO: UNIT TEST
-    @Override
-    public void setHealth(float health) {
-        super.setHealth(health);
-
-        if(this.getHealth() <= 0) {
-            this.setHealth(0);
-        }
-    }
 
     // TODO: UNIT TEST
     public String getName() {
