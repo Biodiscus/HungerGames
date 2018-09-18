@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class HumanTest {
     private final float EPSILON = 0.00000001F;
@@ -64,8 +65,15 @@ public class HumanTest {
 
     @Test
     public void attack() {
-        Human human = new Human("Test2", 10F, 0F, 100F, 0F);
+        Human h2 = new Human("Test2", 10F, 0F, 100F, 0F);
+        float hpBefore = h2.getHealth();
+        human.attack(h2);
+        assertNotEquals(hpBefore, h2.getHealth());
 
-        human.attack(this.human);
+        // The dead can't attack
+        Human dead = new Human("Test2", 100F, 0F, 0F, 0F);
+        hpBefore = h2.getHealth();
+        dead.attack(h2);
+        assertEquals(hpBefore, h2.getHealth());
     }
 }
