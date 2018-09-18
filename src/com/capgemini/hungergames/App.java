@@ -19,9 +19,11 @@ import java.util.Random;
 public class App {
     // The ranges used when creating new players
     private final AttributeRange ATTACK_RANGE   = new AttributeRange(50.0F, 100.0F);
-    private final AttributeRange DEFENSE_RANGE  = new AttributeRange(50.0F, 100.0F);
+    private final AttributeRange DEFENSE_RANGE  = new AttributeRange(5.0F, 10.0F);
     private final AttributeRange HEALTH_RANGE   = new AttributeRange(50.0F, 100.0F);
     private final AttributeRange CHANCE_RANGE   = new AttributeRange(0.0F, 1.0F);
+
+    private final float CHANCE_TWO_PLAYERS_MEET = 0.5F; // 50% Two person meet
 
     // Amount of players that should play the game
     private final int AMOUNT = 23;
@@ -47,17 +49,48 @@ public class App {
         int cycleCount = 0;
         List<Human> alive = players;
 
-        while (alive.size() > 0) {
+        while (alive.size() > 1) {
             cycleCount ++;
             simulateCycle(alive);
 
-            removeDeadPlayers(alive);
-            System.out.println("Current cycle count: "+cycleCount);
+            alive = removeDeadPlayers(alive);
+            System.out.println("Current cycle count: "+cycleCount+", players alive: "+alive.size());
+
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (alive.size() > 0) {
+            System.out.println("The winner is: " + alive.get(0));
+        } else {
+            System.out.println("Everyone died, no winner");
         }
     }
 
     private void simulateCycle(List<Human> alive) {
-        alive.remove(0);
+        int len = alive.size();
+        System.out.println("Got len: "+len);
+        for (int i = 0; i < len - 1; i ++) {
+            // TODO: Math.random() is good enough for now, I want to use Random.nextDouble() though
+            double chance = Math.random();
+            if (chance > CHANCE_TWO_PLAYERS_MEET) {
+                playersFight(alive.get(i), alive.get(i + 1));
+            }
+        }
+    }
+
+    private void playersFight(Human first, Human second) {
+        // TODO: Coin flip on who get's to attack first
+        while(first.isAlive() && second.isAlive()) {
+            first.attack(second);
+            second.attack(first);
+
+            System.out.println("Attacking!");
+            System.out.println("First player alive: "+first.isAlive()+", second alive: "+second.isAlive());
+        }
     }
 
     private List<Human> removeDeadPlayers(List<Human> players) {
