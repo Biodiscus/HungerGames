@@ -1,9 +1,9 @@
-package com.capgemini.hungergames.model.human;
+package main.com.capgemini.hungergames.model.human;
 
-import com.capgemini.hungergames.model.Group;
-import com.capgemini.hungergames.model.human.attribute.Attribute;
-import com.capgemini.hungergames.model.item.Item;
-import com.capgemini.hungergames.util.FloatUtil;
+import main.com.capgemini.hungergames.model.Group;
+import main.com.capgemini.hungergames.model.human.attribute.Attribute;
+import main.com.capgemini.hungergames.model.item.Item;
+import main.com.capgemini.hungergames.util.FloatUtil;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -127,7 +127,7 @@ public class Human extends Attribute {
 
     @Override
     public String toString() {
-        return "Human{" +
+        return "HumanTest{" +
                 "alive=" + alive +
                 ", " + super.toString() +
                 '}';

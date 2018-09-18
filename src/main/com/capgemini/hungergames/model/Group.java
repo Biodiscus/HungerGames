@@ -1,4 +1,4 @@
-package com.capgemini.hungergames.model;
+package main.com.capgemini.hungergames.model;
 
 public enum Group {
     DISTRICT, CAREERS, NONE;

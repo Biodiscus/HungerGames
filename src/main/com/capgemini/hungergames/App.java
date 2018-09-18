@@ -1,17 +1,17 @@
-package com.capgemini.hungergames;
+package main.com.capgemini.hungergames;
 
-import com.capgemini.hungergames.model.Group;
-import com.capgemini.hungergames.model.human.attribute.Attribute;
-import com.capgemini.hungergames.model.human.Human;
-import com.capgemini.hungergames.model.human.Man;
-import com.capgemini.hungergames.model.human.Woman;
-import com.capgemini.hungergames.model.human.attribute.AttributeRange;
-import com.capgemini.hungergames.model.item.Item;
-import com.capgemini.hungergames.model.item.Shield;
-import com.capgemini.hungergames.model.item.Sword;
-import com.capgemini.hungergames.model.item.district.AttackItem;
-import com.capgemini.hungergames.model.item.district.DefenseItem;
-import com.capgemini.hungergames.util.NameUtil;
+import main.com.capgemini.hungergames.model.Group;
+import main.com.capgemini.hungergames.model.human.attribute.Attribute;
+import main.com.capgemini.hungergames.model.human.Human;
+import main.com.capgemini.hungergames.model.human.Man;
+import main.com.capgemini.hungergames.model.human.Woman;
+import main.com.capgemini.hungergames.model.human.attribute.AttributeRange;
+import main.com.capgemini.hungergames.model.item.Item;
+import main.com.capgemini.hungergames.model.item.Shield;
+import main.com.capgemini.hungergames.model.item.Sword;
+import main.com.capgemini.hungergames.model.item.district.AttackItem;
+import main.com.capgemini.hungergames.model.item.district.DefenseItem;
+import main.com.capgemini.hungergames.util.NameUtil;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

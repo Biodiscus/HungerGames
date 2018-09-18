@@ -1,6 +1,6 @@
-package com.capgemini.hungergames.model.human;
+package main.com.capgemini.hungergames.model.human;
 
-import com.capgemini.hungergames.model.human.attribute.Attribute;
+import main.com.capgemini.hungergames.model.human.attribute.Attribute;
 
 public class Woman extends Human {
 

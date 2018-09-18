@@ -1,4 +1,4 @@
-package com.capgemini.hungergames.model.human.attribute;
+package main.com.capgemini.hungergames.model.human.attribute;
 
 import java.util.Random;
 

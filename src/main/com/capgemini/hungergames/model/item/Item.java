@@ -1,4 +1,4 @@
-package com.capgemini.hungergames.model.item;
+package main.com.capgemini.hungergames.model.item;
 
 public class Item {
     public static final float EMPTY_MODIFIER = 0.0f;
