@@ -76,4 +76,21 @@ public class HumanTest {
         dead.attack(h2);
         assertEquals(hpBefore, h2.getHealth());
     }
+
+    @Test
+    public void heal() {
+        human.hurt(90F);
+        human.heal();
+        assertEquals(100F, human.getHealth(), EPSILON);
+
+        // The dead should stay dead
+        human.hurt(100F);
+        human.heal();
+        assertEquals(0F, human.getHealth(), EPSILON);
+
+        Human h2 = new Human("Test2", 0F, 0F, 45F, 0F);
+        h2.hurt(10F);
+        h2.heal();
+        assertEquals(45F, h2.getHealth(), EPSILON);
+    }
 }

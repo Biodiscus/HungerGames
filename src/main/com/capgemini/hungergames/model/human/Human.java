@@ -75,9 +75,10 @@ public class Human extends Attribute {
         }
     }
 
-    // TODO: UNIT TEST
     public void heal() {
-        setHealth(this.startHealth);
+        if (isAlive()) {
+            setHealth(this.startHealth);
+        }
     }
 
     // TODO: UNIT TEST
