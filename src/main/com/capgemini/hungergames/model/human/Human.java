@@ -53,7 +53,6 @@ public class Human extends Attribute {
             }
         }
 
-
         System.out.println("\t["+getName()+"] Attacks with: "+attackAmount);
         human.hurt(attackAmount);
     }

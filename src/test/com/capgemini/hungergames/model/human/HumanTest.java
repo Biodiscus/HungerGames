@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HumanTest {
+    private final float EPSILON = 0.00000001F;
     private Human human;
 
     @BeforeEach
@@ -43,5 +44,28 @@ public class HumanTest {
         human.setGroup(Group.NONE);
         name = human.getName();
         assertEquals("Test", name);
+    }
+
+    @Test
+    public void hurt() {
+        Human human2 = new Human("Test2", 0F, 20F, 100F, 0F);
+        human2.hurt(30F);
+        assertEquals(90F, human2.getHealth(), EPSILON);
+
+        human2 = new Human("Test2", 0F, 0F, 100F, 0F);
+        human2.hurt(0F);
+        assertEquals(100F, human2.getHealth(), EPSILON);
+
+        human2 = new Human("Test2", 0F, 10F, 100F, 0F);
+        human2.hurt(5F);
+        assertEquals(100F, human2.getHealth(), EPSILON);
+        // TODO: Item modifiers
+    }
+
+    @Test
+    public void attack() {
+        Human human = new Human("Test2", 10F, 0F, 100F, 0F);
+
+        human.attack(this.human);
     }
 }
