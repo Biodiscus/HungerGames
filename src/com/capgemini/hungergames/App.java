@@ -6,6 +6,7 @@ import com.capgemini.hungergames.model.human.Man;
 import com.capgemini.hungergames.model.human.Woman;
 import com.capgemini.hungergames.model.human.attribute.AttributeRange;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -21,7 +22,6 @@ public class App {
     private final AttributeRange DEFENSE_RANGE  = new AttributeRange(50.0F, 100.0F);
     private final AttributeRange HEALTH_RANGE   = new AttributeRange(50.0F, 100.0F);
     private final AttributeRange CHANCE_RANGE   = new AttributeRange(0.0F, 1.0F);
-
 
     // Amount of players that should play the game
     private final int AMOUNT = 23;
@@ -40,12 +40,40 @@ public class App {
         humanList.addAll(createMale(AMOUNT, PERCENTAGE_MALE, generator));
         humanList.addAll(createFemale(AMOUNT, PERCENTAGE_FEMALE, generator));
 
-        System.out.println("Humans: "+humanList);
+        run(humanList);
+    }
 
+    private void run(List<Human> players) {
+        int cycleCount = 0;
+        List<Human> alive = players;
+
+        while (alive.size() > 0) {
+            cycleCount ++;
+            simulateCycle(alive);
+
+            removeDeadPlayers(alive);
+            System.out.println("Current cycle count: "+cycleCount);
+        }
+    }
+
+    private void simulateCycle(List<Human> alive) {
+        alive.remove(0);
+    }
+
+    private List<Human> removeDeadPlayers(List<Human> players) {
+        List<Human> alive = new ArrayList<>();
+
+        players.forEach((ele) -> {
+            if (ele.isAlive()) {
+                alive.add(ele);
+            }
+        });
+
+        return alive;
     }
 
     private List<Human> createMale(int amount, double percentageMale, AttributeGenerator generator) {
-        List<Human> humanList = new LinkedList<>();
+        List<Human> humanList = new ArrayList<>();
         // Casting to an integer is the same as Math.floor, adding 0.5 makes it Math.ceil
         int count = (int) ((amount * percentageMale) + 0.5);
 
@@ -58,7 +86,7 @@ public class App {
     }
 
     private List<Human> createFemale(int amount, double percentageFemale, AttributeGenerator generator) {
-        List<Human> humanList = new LinkedList<>();
+        List<Human> humanList = new ArrayList<>();
 
         int count = (int) (amount * percentageFemale);
 
