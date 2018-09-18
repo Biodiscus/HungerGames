@@ -30,8 +30,8 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" +
-                "attackModifier=" + attackModifier +
-                ", defenseModifier=" + defenseModifier +
+                "attack=" + attackModifier +
+                ", defense=" + defenseModifier +
                 '}';
     }
 }

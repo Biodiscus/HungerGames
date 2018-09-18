@@ -5,6 +5,9 @@ import com.capgemini.hungergames.model.human.Human;
 import com.capgemini.hungergames.model.human.Man;
 import com.capgemini.hungergames.model.human.Woman;
 import com.capgemini.hungergames.model.human.attribute.AttributeRange;
+import com.capgemini.hungergames.model.item.Item;
+import com.capgemini.hungergames.model.item.Shield;
+import com.capgemini.hungergames.model.item.Sword;
 import com.capgemini.hungergames.util.NameUtil;
 
 import javax.naming.Name;
@@ -28,12 +31,17 @@ public class App {
     private final AttributeRange CHANCE_RANGE   = new AttributeRange(0.0F, 1.0F);
 
     private final float CHANCE_TWO_PLAYERS_MEET = 0.5F; // 50% Two person meet
+    private final float CHANCE_PLAYER_FINDS_ITEM = 0.2F; // 50% Two person meet
 
     // Amount of players that should play the game
     private final int AMOUNT = 23;
     // Range: Between 0 and 1, 0.5 = 50%
     private final float PERCENTAGE_MALE = 0.5f;
     private final float PERCENTAGE_FEMALE = 1 - PERCENTAGE_MALE;
+
+
+    // TODO: This is ugly
+    private final Item[] AVAILABLE_ITEMS = {new Sword(), new Shield()};
 
     public App() {
         List<Human> humanList = new LinkedList<>();
@@ -81,8 +89,24 @@ public class App {
     }
 
     private void simulateCycle(List<Human> alive) {
+        letPlayersBattle(alive);
+        letPlayersFindItems(alive);
+        alive.forEach(Human::heal);
+    }
+
+    private void letPlayersFindItems(List<Human> alive) {
+        alive.forEach((player) -> {
+            boolean findsItem = Math.random() > CHANCE_PLAYER_FINDS_ITEM;
+            if (findsItem) {
+                int randomPos = (int) (AVAILABLE_ITEMS.length * Math.random());
+                Item randomItem = AVAILABLE_ITEMS[randomPos];
+                player.addItem(randomItem);
+            }
+        });
+    }
+
+    private void letPlayersBattle(List<Human> alive) {
         int len = alive.size();
-        System.out.println("Got len: "+len);
         for (int i = 0; i < len - 1; i ++) {
             // TODO: Math.random() is good enough for now, I want to use Random.nextDouble() though
             double chance = Math.random();
@@ -93,12 +117,13 @@ public class App {
     }
 
     private void playersFight(Human first, Human second) {
+        System.out.println("Player "+first.getName()+" (with items: "+first.getItems()+"), fights with player " + second.getName()+" (with items: "+second.getItems()+")");
+
         // TODO: Coin flip on who get's to attack first
         while(first.isAlive() && second.isAlive()) {
             first.attack(second);
             second.attack(first);
 
-            System.out.println("Attacking!");
             System.out.println("First player alive: "+first.isAlive()+", second alive: "+second.isAlive());
         }
     }
