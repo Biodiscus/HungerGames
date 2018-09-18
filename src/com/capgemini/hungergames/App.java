@@ -5,7 +5,11 @@ import com.capgemini.hungergames.model.human.Human;
 import com.capgemini.hungergames.model.human.Man;
 import com.capgemini.hungergames.model.human.Woman;
 import com.capgemini.hungergames.model.human.attribute.AttributeRange;
+import com.capgemini.hungergames.util.NameUtil;
 
+import javax.naming.Name;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,8 +43,14 @@ public class App {
                 HEALTH_RANGE, CHANCE_RANGE
         );
 
-        humanList.addAll(createMale(AMOUNT, PERCENTAGE_MALE, generator));
-        humanList.addAll(createFemale(AMOUNT, PERCENTAGE_FEMALE, generator));
+        try {
+            humanList.addAll(createMale(AMOUNT, PERCENTAGE_MALE, generator));
+            humanList.addAll(createFemale(AMOUNT, PERCENTAGE_FEMALE, generator));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
 
         run(humanList);
     }
@@ -64,7 +74,7 @@ public class App {
         }
 
         if (alive.size() > 0) {
-            System.out.println("The winner is: " + alive.get(0));
+            System.out.println("The winner is: " + alive.get(0).getName());
         } else {
             System.out.println("Everyone died, no winner");
         }
@@ -105,27 +115,29 @@ public class App {
         return alive;
     }
 
-    private List<Human> createMale(int amount, double percentageMale, AttributeGenerator generator) {
+    private List<Human> createMale(int amount, double percentageMale, AttributeGenerator generator) throws IOException, URISyntaxException {
         List<Human> humanList = new ArrayList<>();
         // Casting to an integer is the same as Math.floor, adding 0.5 makes it Math.ceil
         int count = (int) ((amount * percentageMale) + 0.5);
 
         for (int i = 0; i < count; i ++) {
             Attribute attribute = generator.generate();
-            humanList.add(new Man(attribute));
+            String name = NameUtil.generateName(NameUtil.Gender.MALE);
+            humanList.add(new Man(name, attribute));
         }
 
         return humanList;
     }
 
-    private List<Human> createFemale(int amount, double percentageFemale, AttributeGenerator generator) {
+    private List<Human> createFemale(int amount, double percentageFemale, AttributeGenerator generator) throws IOException, URISyntaxException {
         List<Human> humanList = new ArrayList<>();
 
         int count = (int) (amount * percentageFemale);
 
         for (int i = 0; i < count; i ++) {
             Attribute attribute = generator.generate();
-            humanList.add(new Woman(attribute));
+            String name = NameUtil.generateName(NameUtil.Gender.FEMALE);
+            humanList.add(new Woman(name, attribute));
         }
 
         return humanList;

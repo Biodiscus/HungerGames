@@ -4,8 +4,8 @@ import com.capgemini.hungergames.model.human.attribute.Attribute;
 
 public class Woman extends Human {
 
-    public Woman(Attribute attribute) {
-        super(attribute);
+    public Woman(String name, Attribute attribute) {
+        super(name, attribute);
     }
 
 }
