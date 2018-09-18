@@ -1,5 +1,6 @@
 package com.capgemini.hungergames;
 
+import com.capgemini.hungergames.model.Group;
 import com.capgemini.hungergames.model.human.attribute.Attribute;
 import com.capgemini.hungergames.model.human.Human;
 import com.capgemini.hungergames.model.human.Man;
@@ -8,15 +9,13 @@ import com.capgemini.hungergames.model.human.attribute.AttributeRange;
 import com.capgemini.hungergames.model.item.Item;
 import com.capgemini.hungergames.model.item.Shield;
 import com.capgemini.hungergames.model.item.Sword;
+import com.capgemini.hungergames.model.item.district.AttackItem;
+import com.capgemini.hungergames.model.item.district.DefenseItem;
 import com.capgemini.hungergames.util.NameUtil;
 
-import javax.naming.Name;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Starting point for the application.
@@ -33,9 +32,11 @@ public class App {
     private final float CHANCE_TWO_PLAYERS_MEET = 0.5F; // 50% Two person meet
     private final float CHANCE_PLAYER_FINDS_ITEM = 0.2F; // 50% Two person meet
 
-    // Amount of players that should play the game
-    private final int AMOUNT = 23;
-    // Range: Between 0 and 1, 0.5 = 50%
+    private final int PLAYER_AMOUNT = 23;
+    private final float DISTRICT_CONTESTANTS = 0.25f; // 0.25 == 25%
+    private final float CAREER_CONTESTANTS = 0.25f; // 0.25 == 25%
+
+    // Between 0 and 1, 0.5 = 50%
     private final float PERCENTAGE_MALE = 0.5f;
     private final float PERCENTAGE_FEMALE = 1 - PERCENTAGE_MALE;
 
@@ -52,15 +53,37 @@ public class App {
         );
 
         try {
-            humanList.addAll(createMale(AMOUNT, PERCENTAGE_MALE, generator));
-            humanList.addAll(createFemale(AMOUNT, PERCENTAGE_FEMALE, generator));
+            humanList.addAll(createMale(PLAYER_AMOUNT, PERCENTAGE_MALE, generator));
+            humanList.addAll(createFemale(PLAYER_AMOUNT, PERCENTAGE_FEMALE, generator));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
 
+        Collections.shuffle(humanList);
+
+        setupDistricts(humanList);
         run(humanList);
+    }
+
+    private void setupDistricts(List<Human> players) {
+        int len = players.size();
+        int amountDistrict = (int)(len * DISTRICT_CONTESTANTS);
+        int amountCareer = (int)((len - amountDistrict) * CAREER_CONTESTANTS);
+
+        for (int i = 0; i < amountDistrict + amountCareer; i ++) {
+            Human player = players.get(i);
+
+            if (i < amountDistrict) {
+                // Group players have a fierce drive to survive and have a bonus to their defense level
+                player.addItem(new DefenseItem());
+                player.setGroup(Group.DISTRICT);
+            } else {
+                player.addItem(new AttackItem());
+                player.setGroup(Group.CAREERS);
+            }
+        }
     }
 
     private void run(List<Human> players) {

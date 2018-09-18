@@ -1,5 +1,6 @@
 package com.capgemini.hungergames.model.human;
 
+import com.capgemini.hungergames.model.Group;
 import com.capgemini.hungergames.model.human.attribute.Attribute;
 import com.capgemini.hungergames.model.item.Item;
 import com.capgemini.hungergames.util.FloatUtil;
@@ -10,6 +11,7 @@ import java.util.List;
 public class Human extends Attribute {
     private boolean alive;
     private String name;
+    private Group group;
 
     private float startHealth;
     private float startAttack;
@@ -29,12 +31,15 @@ public class Human extends Attribute {
         this.startAttack = attack;
         this.startDefense = defense;
 
-        alive = true;
+        this.alive = true;
         this.name = name;
 
-        items = new LinkedList<>();
+        this.group = Group.NONE;
+
+        this.items = new LinkedList<>();
     }
 
+    // TODO: UNIT TEST
     public void attack(Human human) {
         if (!isAlive()) {
             return;
@@ -53,6 +58,7 @@ public class Human extends Attribute {
         human.hurt(attackAmount);
     }
 
+    // TODO: UNIT TEST
     public void hurt(float amount) {
         float hp = getHealth();
 
@@ -75,10 +81,12 @@ public class Human extends Attribute {
         }
     }
 
+    // TODO: UNIT TEST
     public void heal() {
         setHealth(this.startHealth);
     }
 
+    // TODO: UNIT TEST
     @Override
     public void setHealth(float health) {
         super.setHealth(health);
@@ -88,8 +96,13 @@ public class Human extends Attribute {
         }
     }
 
+    // TODO: UNIT TEST
     public String getName() {
-        return name;
+        if (getGroup() != Group.NONE) {
+            return name + " of group "+getGroup();
+        } else {
+            return name;
+        }
     }
 
     public boolean isAlive() {
@@ -102,6 +115,14 @@ public class Human extends Attribute {
 
     public List<Item> getItems() {
         return items;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     @Override
