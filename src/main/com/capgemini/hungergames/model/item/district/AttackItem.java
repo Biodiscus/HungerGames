@@ -1,6 +1,6 @@
-package main.com.capgemini.hungergames.model.item.district;
+package com.capgemini.hungergames.model.item.district;
 
-import main.com.capgemini.hungergames.model.item.Item;
+import com.capgemini.hungergames.model.item.Item;
 
 public class AttackItem extends Item {
     public AttackItem() {

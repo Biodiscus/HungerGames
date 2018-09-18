@@ -1,4 +1,4 @@
-package main.com.capgemini.hungergames.model.human.attribute;
+package com.capgemini.hungergames.model.human.attribute;
 
 /**
  * Provides basic attributes that the human can use.

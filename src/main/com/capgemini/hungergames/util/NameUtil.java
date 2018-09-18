@@ -1,4 +1,4 @@
-package main.com.capgemini.hungergames.util;
+package com.capgemini.hungergames.util;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

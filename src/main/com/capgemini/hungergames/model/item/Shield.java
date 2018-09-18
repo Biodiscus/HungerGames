@@ -1,4 +1,4 @@
-package main.com.capgemini.hungergames.model.item;
+package com.capgemini.hungergames.model.item;
 
 public class Shield extends Item {
     public Shield() {

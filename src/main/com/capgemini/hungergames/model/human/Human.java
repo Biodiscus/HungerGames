@@ -1,9 +1,9 @@
-package main.com.capgemini.hungergames.model.human;
+package com.capgemini.hungergames.model.human;
 
-import main.com.capgemini.hungergames.model.Group;
-import main.com.capgemini.hungergames.model.human.attribute.Attribute;
-import main.com.capgemini.hungergames.model.item.Item;
-import main.com.capgemini.hungergames.util.FloatUtil;
+import com.capgemini.hungergames.model.Group;
+import com.capgemini.hungergames.model.human.attribute.Attribute;
+import com.capgemini.hungergames.model.item.Item;
+import com.capgemini.hungergames.util.FloatUtil;
 
 import java.util.LinkedList;
 import java.util.List;

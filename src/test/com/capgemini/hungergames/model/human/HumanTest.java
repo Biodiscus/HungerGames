@@ -1,9 +1,9 @@
-package test.com.capgemini.hungergames.model.human;
+package com.capgemini.hungergames.model.human;
 
-import main.com.capgemini.hungergames.model.Group;
-import main.com.capgemini.hungergames.model.human.Human;
-import main.com.capgemini.hungergames.model.human.Man;
-import main.com.capgemini.hungergames.model.human.attribute.Attribute;
+import com.capgemini.hungergames.model.Group;
+import com.capgemini.hungergames.model.human.Human;
+import com.capgemini.hungergames.model.human.Man;
+import com.capgemini.hungergames.model.human.attribute.Attribute;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package main.com.capgemini.hungergames.util;
+package com.capgemini.hungergames.util;
 
 public class FloatUtil {
     private static final float DEFAULT_ACCURACY = 0.00000001F;
