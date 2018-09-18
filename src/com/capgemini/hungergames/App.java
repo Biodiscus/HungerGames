@@ -139,10 +139,19 @@ public class App {
         }
     }
 
+
     private void playersFight(Human first, Human second) {
         System.out.println("Player "+first.getName()+" (with items: "+first.getItems()+"), fights with player " + second.getName()+" (with items: "+second.getItems()+")");
+        // Decide who can go first
+        double firstAmount = Math.random() * first.getChance();
+        double secondAmount = Math.random() * second.getChance();
 
-        // TODO: Coin flip on who get's to attack first
+        if (secondAmount > firstAmount) {
+            Human copy = first;
+            second = first;
+            first = copy;
+        }
+
         while(first.isAlive() && second.isAlive()) {
             first.attack(second);
             second.attack(first);
